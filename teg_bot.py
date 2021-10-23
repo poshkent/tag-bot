@@ -6,7 +6,7 @@ import schedule
 from datetime import datetime
 from multiprocessing import Process
 
-from telebot.types import Message
+from telebot.types import Message, Venue
 
 
 all1 = {'Дима': '752872267', 'Паша': '629075242', 'Полина Кочеткова': '967925905', 'Виталик': '485433810', 'Витя': '1250087021', 'Полина Ковалева': '650761348',
@@ -66,9 +66,7 @@ def notify():
 def tag_all(message):
     tag = ""
     for key, value in all1.items():
-        tag += '['+key+'](tg://user?id='+str(value)+')' + " "
-
-    print(message.chat.id)
+        tag += f'[{key}](tg://user?id={value}) '
     bot.send_message(message.chat.id, tag, parse_mode="Markdown")
 
 
@@ -76,7 +74,7 @@ def tag_all(message):
 def tag_hostel(message):
     tag = ""
     for key, value in hostel.items():
-        tag += '['+key+'](tg://user?id='+value+')' + " "
+        tag += f'[{key}](tg://user?id={value}) '
     bot.send_message(message.chat.id, tag, parse_mode="Markdown")
 
 
@@ -84,7 +82,7 @@ def tag_hostel(message):
 def tag_minsk(message):
     tag = ""
     for key, value in minsk.items():
-        tag += '['+key+'](tg://user?id='+str(value)+')' + " "
+        tag += f'[{key}](tg://user?id={value}) '
     bot.send_message(message.chat.id, tag, parse_mode="Markdown")
 
 
@@ -96,7 +94,7 @@ def duty(message):
 
 stat = Nahui(file_path)
 stat.collect()
-schedule.every().sunday.at("22:00").do(notify)
+schedule.every().sunday.at("23:00").do(notify)
 
 
 def loop():
