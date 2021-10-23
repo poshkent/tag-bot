@@ -19,7 +19,6 @@ TOKEN = '1827746031:AAGKqa_5XyWhcBYtCIZ_QxhcQdmaoIHcHWQ'
 CHAT_ID = '-1001185015555'
 duty = ['@againTL @Tomasttt @greedann', '@Shuhmen @NiK1TA315',
         '@kowalskivarianty ', '@natarg @Fllloyd', '@Appolinapiya ', ]
-file_path = os.path.normpath("D:\Desktop\list.txt")
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -92,7 +91,7 @@ def duty(message):
     bot.send_message(message.chat.id, tag_duty, parse_mode="Markdown")
 
 
-stat = Nahui(file_path)
+stat = Nahui('list.txt')
 stat.collect()
 schedule.every().sunday.at("22:00").do(notify)
 
