@@ -94,7 +94,7 @@ def duty(message):
 
 stat = Nahui(file_path)
 stat.collect()
-schedule.every().sunday.at("23:00").do(notify)
+schedule.every().sunday.at("22:00").do(notify)
 
 
 def loop():
