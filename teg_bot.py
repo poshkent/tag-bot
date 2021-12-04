@@ -6,7 +6,6 @@ from datetime import datetime
 from multiprocessing import Process
 
 
-
 all = {
     'Ceвa': '1021465762',
     'Антон': '1084801379',
@@ -26,13 +25,13 @@ all = {
     'Полина Ковалева': '650761348',
     'Полина Кочеткова': '967925905',
     'Помело': '461883085',
-    'Саша Бренчанинов' : '1318315130',
+    'Саша Бренчанинов': '1318315130',
     'Серёжа': '994027544',
     'Дима Василевич': '1836814972',
     'Женя': '1010820388',
-    'Саша Габриневский' : '503086754',
-    'Дед' : '927086053',
-    'Денис' : '1123009924'
+    'Саша Габриневский': '503086754',
+    'Дед': '927086053',
+    'Денис': '1123009924'
 }
 
 hostel = [
@@ -88,20 +87,20 @@ class Nahui:
         self.date = '{} {}'.format(self.line[-6:-4], self.line[-3:-1])
         self.message = self.line[0:-8]
 
-    def notify(a = None):
+    def notify(a=None):
         now = datetime.now()
         date = now.strftime("%d %m")
         try:
             students = stat.get_people(date)
         except:
-            bot.send_message(CHAT_ID, 'Дежурных нет идите нахуй', parse_mode="Markdown")
+            bot.send_message(
+                CHAT_ID, 'Дежурных нет идите нахуй', parse_mode="Markdown")
         students = list(students.split(', '))
         tag = 'Дежурные на неделю: '
         for piple in students:
             tag += f'[{piple}](tg://user?id={all[piple]}), '
         tag = tag[:-2]
         bot.send_message(CHAT_ID, tag, parse_mode="Markdown")
-        
 
     def collect(self):
         with open(self.file_name, 'r', encoding='utf-8') as file:
@@ -111,7 +110,6 @@ class Nahui:
 
     def get_people(self, date):
         return self.stat[date]
-
 
 
 @bot.message_handler(commands=['all'])
@@ -143,7 +141,7 @@ def duty(message):
     stat.notify()
 
 
-stat = Nahui('d:\Desktop\list.txt')
+stat = Nahui('./list.txt')
 stat.collect()
 schedule.every().sunday.at("22:00").do(stat.notify)
 
