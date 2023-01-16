@@ -141,7 +141,7 @@ def duty(message):
     stat.notify()
 
 
-stat = Nahui('./list.txt')
+stat = Nahui('list.txt')
 stat.collect()
 schedule.every().sunday.at("22:00").do(stat.notify)
 
